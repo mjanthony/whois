@@ -1,0 +1,284 @@
+<h1 class="text-lowercase">
+        {{data.domainName}}<!--{{#if
+            data.dnssec}} <span class="badge badge-secondary">DNSSEC {{data.dnssec}}</span>{{/if}}-->
+</h1>
+
+{{#if data.formatted}}
+    <small>Record last checked {{data.lastUpdateOfWhoisDatabase.relative}}, no changes
+        since {{data.updatedDate.formatted}}</small>
+
+    <div class="card-deck mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Dates</h5>
+                <p class="card-text">
+                    <strong>Created</strong>
+                    <br>
+                    <span>{{data.creationDate.formatted}}</span>
+                    <br>
+                    <small class="text-muted">{{data.creationDate.relative}}</small>
+                </p>
+                <p class="card-text">
+                    <strong>Expires</strong>
+                    <br>
+                    <span>{{data.registrarRegistrationExpirationDate.formatted}}</span>
+                    <br>
+                    <small class="text-muted">{{data.registrarRegistrationExpirationDate.relative}}</small>
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Name Servers</h5>
+                <ul class="card-text list-unstyled">
+                    {{#each data.nameServer}}
+                        <li><code>{{this}}</code></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registrar</h5>
+                <p class="card-text">
+                    <strong>{{data.registrar}}</strong>
+                    <br>
+                    <a href="{{data.registrarUrl}}">{{data.registrarUrl}}</a>
+                </p>
+                <p class="card-text">
+                    <a class="btn btn-danger btn-sm" data-toggle="collapse" href="#abuseReport" role="button"
+                       aria-expanded="false" aria-controls="abuseReport">Report abuse</a>
+                </p>
+                <p class="card-text collapse" id="abuseReport">
+                    <small>Email: <a class="text-danger"
+                                     href="mailto:{{data.registrarAbuseContactEmail}}">{{data.registrarAbuseContactEmail}}</a></small>
+                    <br>
+                    <small>Phone: <a class="text-danger"
+                                     href="tel:{{data.registrarAbuseContactPhone}}">{{data.registrarAbuseContactPhone}}</a></small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">Contacts</h2>
+    <div class="card-deck mt-4">
+        {{#if data.registrantCountry}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Owner</h5>
+                    <table class="card-text table table-sm">
+                        {{#if data.registrantName}}
+                            <tr>
+                                <td>Name</td>
+                                <td>{{data.registrantName}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.registrantOrganization}}
+                            <tr>
+                                <td>Organization</td>
+                                <td>{{data.registrantOrganization}}</td>
+                            </tr>
+                        {{/if}}
+                        <tr>
+                            <td>Address</td>
+                            <td>
+                                <address class="mb-0">
+                                    {{#if data.registrantStreet}}{{data.registrantStreet}}<br>{{/if}}
+                                    {{#if data.registrantCity}}{{data.registrantCity}}<br>{{/if}}
+                                    {{#if data.registrantStateProvince}}{{data.registrantStateProvince}}<br>{{/if}}
+                                    {{#if data.registrantPostalCode}}{{data.registrantPostalCode}}<br>{{/if}}
+                                    {{#if data.registrantCountry}}{{data.registrantCountry}}{{/if}}
+                                </address>
+                            </td>
+                        </tr>
+                        {{#if data.registrantPhone}}
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{data.registrantPhone}}{{#if data.registrantPhoneExt}}
+                                    ext. {{data.registrantPhoneExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.registrantFax}}
+                            <tr>
+                                <td>Fax</td>
+                                <td>{{data.registrantFax}}{{#if data.registrantFaxExt}}
+                                    ext. {{data.registrantFaxExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.registrantEmail}}
+                            <tr>
+                                <td>Email</td>
+                                <td>{{data.registrantEmail}}</td>
+                            </tr>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        {{/if}}
+        {{#if data.adminCountry}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Administrative contact</h5>
+                    <table class="card-text table table-sm">
+                        {{#if data.adminName}}
+                            <tr>
+                                <td>Name</td>
+                                <td>{{data.adminName}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.adminOrganization}}
+                            <tr>
+                                <td>Organization</td>
+                                <td>{{data.adminOrganization}}</td>
+                            </tr>
+                        {{/if}}
+                        <tr>
+                            <td>Address</td>
+                            <td>
+                                <address class="mb-0">
+                                    {{#if data.adminStreet}}{{data.adminStreet}}<br>{{/if}}
+                                    {{#if data.adminCity}}{{data.adminCity}}<br>{{/if}}
+                                    {{#if data.adminStateProvince}}{{data.adminStateProvince}}<br>{{/if}}
+                                    {{#if data.adminPostalCode}}{{data.adminPostalCode}}<br>{{/if}}
+                                    {{#if data.adminCountry}}{{data.adminCountry}}{{/if}}
+                                </address>
+                            </td>
+                        </tr>
+                        {{#if data.adminPhone}}
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{data.adminPhone}}{{#if data.adminPhoneExt}}
+                                    ext. {{data.adminPhoneExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.adminFax}}
+                            <tr>
+                                <td>Fax</td>
+                                <td>{{data.adminFax}}{{#if data.adminFaxExt}} ext. {{data.adminFaxExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.adminEmail}}
+                            <tr>
+                                <td>Email</td>
+                                <td>{{data.adminEmail}}</td>
+                            </tr>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+    <div class="card-deck mt-4">
+        {{#if data.techCountry}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Technical contact</h5>
+                    <table class="card-text table table-sm">
+                        {{#if data.techName}}
+                            <tr>
+                                <td>Name</td>
+                                <td>{{data.techName}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.techOrganization}}
+                            <tr>
+                                <td>Organization</td>
+                                <td>{{data.techOrganization}}</td>
+                            </tr>
+                        {{/if}}
+                        <tr>
+                            <td>Address</td>
+                            <td>
+                                <address class="mb-0">
+                                    {{#if data.techStreet}}{{data.techStreet}}<br>{{/if}}
+                                    {{#if data.techCity}}{{data.techCity}}<br>{{/if}}
+                                    {{#if data.techStateProvince}}{{data.techStateProvince}}<br>{{/if}}
+                                    {{#if data.techPostalCode}}{{data.techPostalCode}}<br>{{/if}}
+                                    {{#if data.techCountry}}{{data.techCountry}}{{/if}}
+                                </address>
+                            </td>
+                        </tr>
+                        {{#if data.techPhone}}
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{data.techPhone}}{{#if data.techPhoneExt}} ext. {{data.techPhoneExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.techFax}}
+                            <tr>
+                                <td>Fax</td>
+                                <td>{{data.techFax}}{{#if data.techFaxExt}} ext. {{data.techFaxExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.techEmail}}
+                            <tr>
+                                <td>Email</td>
+                                <td>{{data.techEmail}}</td>
+                            </tr>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        {{/if}}
+        {{#if data.billingCountry}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Billing contact</h5>
+                    <table class="card-text table table-sm">
+                        {{#if data.billingName}}
+                            <tr>
+                                <td>Name</td>
+                                <td>{{data.billingName}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.billingOrganization}}
+                            <tr>
+                                <td>Organization</td>
+                                <td>{{data.billingOrganization}}</td>
+                            </tr>
+                        {{/if}}
+                        <tr>
+                            <td>Address</td>
+                            <td>
+                                <address class="mb-0">
+                                    {{#if data.billingStreet}}{{data.billingStreet}}<br>{{/if}}
+                                    {{#if data.billingCity}}{{data.billingCity}}<br>{{/if}}
+                                    {{#if data.billingStateProvince}}{{data.billingStateProvince}}<br>{{/if}}
+                                    {{#if data.billingPostalCode}}{{data.billingPostalCode}}<br>{{/if}}
+                                    {{#if data.billingCountry}}{{data.billingCountry}}{{/if}}
+                                </address>
+                            </td>
+                        </tr>
+                        {{#if data.billingPhone}}
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{data.billingPhone}}{{#if data.billingPhoneExt}}
+                                    ext. {{data.billingPhoneExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.billingFax}}
+                            <tr>
+                                <td>Fax</td>
+                                <td>{{data.billingFax}}{{#if data.billingFaxExt}}
+                                    ext. {{data.billingFaxExt}}{{/if}}</td>
+                            </tr>
+                        {{/if}}
+                        {{#if data.billingEmail}}
+                            <tr>
+                                <td>Email</td>
+                                <td>{{data.billingEmail}}</td>
+                            </tr>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+{{/if}}
+
+<h2 class="mt-5">Raw data</h2>
+<div class="card mt-4 mb-5">
+    <div class="card-body">
+        <pre class="mb-0">{{data.rawData}}</pre>
+    </div>
+</div>
